@@ -1,3 +1,17 @@
 .PHONY: all
-all:
-	clang -c -o foobar.o foobar.c
+all: link
+
+build:
+	cc -c foo.c
+	cc -c bar.c
+	cc -c foobar.c
+
+prefix: build
+	objcopy --prefix-symbols=bar_ bar.o
+	objcopy --prefix-symbols=foo_ foo.o
+
+link: prefix
+	cc  foobar.o foo.o bar.o -o foobar
+
+clean:
+	@rm -f *.o foobar || true
