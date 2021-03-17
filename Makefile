@@ -12,6 +12,9 @@ prefix: build
 
 link: prefix
 	cc  foobar.o foo.o bar.o -o foobar
+	./foobar
+	nm foo.o
+	nm bar.o
 
 clean:
 	@rm -f *.o foobar || true
